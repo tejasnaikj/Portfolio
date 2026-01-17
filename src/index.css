@@ -2,13 +2,18 @@
    GLOBAL RESET & BASE
 ================================ */
 :root {
-  --primary-color: #ff7eb3;
-  --secondary-color: #8e44ad;
+  /* Changed from Pink to Sky Blue to match the new background */
+  --primary-color: #38bdf8;
+  --secondary-color: #3b82f6;
+
   --text-color: #e5e7eb;
-  --text-muted: #9ca3af;
-  --glass-bg: rgba(255, 255, 255, 0.05);
-  --glass-border: rgba(255, 255, 255, 0.1);
-  --card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  --text-muted: #94a3b8;
+
+  /* Slightly darker glass for better contrast */
+  --glass-bg: rgba(15, 23, 42, 0.6);
+  --glass-border: rgba(56, 189, 248, 0.1);
+  /* Subtle blue border tint */
+  --card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
 }
 
 * {
@@ -21,10 +26,17 @@ body {
   font-family: "Inter", system-ui, sans-serif;
   color: var(--text-color);
   min-height: 100vh;
-  /* 🔥 NEW DARKER GRADIENT BACKGROUND */
-  background: linear-gradient(135deg, #2c001e, #3d002e, #1a0014);
-  background-size: 200% 200%;
-  animation: gradientMove 15s ease infinite;
+  
+  /* 🔥 SHARPER BLACK & BLUE GRADIENT */
+  background: linear-gradient(
+    125deg,
+    #000000 0%,    /* Pure Black top-left */
+    #0a0a0a 35%,   /* Soft Black transition */
+    #1e3a8a 65%,   /* Strong Blue */
+    #172554 100%   /* Deep Royal Blue bottom-right */
+  );
+  
+  background-attachment: fixed; /* Keeps gradient locked when scrolling */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -32,9 +44,17 @@ body {
 }
 
 @keyframes gradientMove {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 /* ===============================
@@ -54,11 +74,13 @@ body {
 ================================ */
 .app-container {
   display: grid;
-  grid-template-columns: 300px 1fr; /* Sidebar | Main Content */
+  grid-template-columns: 300px 1fr;
+  /* Sidebar | Main Content */
   gap: 30px;
   width: 100%;
   max-width: 1200px;
-  height: 85vh; /* Fixed height for the card layout look */
+  height: 85vh;
+  /* Fixed height for the card layout look */
   position: relative;
 }
 
@@ -83,7 +105,8 @@ body {
   width: 130px;
   height: 130px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #ffcc00, #ff9900); /* Example avatar color */
+  background: linear-gradient(135deg, #ffcc00, #ff9900);
+  /* Example avatar color */
   margin: 0 auto 20px;
   display: flex;
   justify-content: center;
@@ -148,9 +171,11 @@ body {
   padding: 50px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Spushes social links to bottom */
+  justify-content: space-between;
+  /* Spushes social links to bottom */
   height: 100%;
-  overflow-y: auto; /* Scroll inside the main panel if content is long */
+  overflow-y: auto;
+  /* Scroll inside the main panel if content is long */
 }
 
 /* Hide scrollbar for a cleaner look */
@@ -169,8 +194,15 @@ body {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Headings in main content */
@@ -274,7 +306,7 @@ body {
     padding: 10px;
     align-items: flex-start;
   }
-  
+
   .theme-toggle-btn {
     top: 10px;
     right: 10px;
@@ -306,32 +338,39 @@ body {
     flex-direction: row;
     width: auto;
   }
-  
+
   .nav-btn {
-      padding: 10px 15px;
-      font-size: 14px;
+    padding: 10px 15px;
+    font-size: 14px;
   }
 
   .main-content {
     padding: 40px 20px;
     height: auto;
   }
-  
-  .content-section h1 { font-size: 36px; }
-  .content-section h2 { font-size: 28px; }
+
+  .content-section h1 {
+    font-size: 36px;
+  }
+
+  .content-section h2 {
+    font-size: 28px;
+  }
 }
 
 @media (max-width: 600px) {
-    .sidebar {
-        flex-direction: column;
-        text-align: center;
-    }
-    .profile-section {
-        flex-direction: column;
-    }
-    .nav-menu {
-        width: 100%;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
+  .sidebar {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .profile-section {
+    flex-direction: column;
+  }
+
+  .nav-menu {
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 }
