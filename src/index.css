@@ -1,57 +1,337 @@
-html { scroll-behavior: smooth; }
+/* ===============================
+   GLOBAL RESET & BASE
+================================ */
+:root {
+  --primary-color: #ff7eb3;
+  --secondary-color: #8e44ad;
+  --text-color: #e5e7eb;
+  --text-muted: #9ca3af;
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-}
-
-nav {
+  font-family: "Inter", system-ui, sans-serif;
+  color: var(--text-color);
+  min-height: 100vh;
+  /* 🔥 NEW DARKER GRADIENT BACKGROUND */
+  background: linear-gradient(135deg, #2c001e, #3d002e, #1a0014);
+  background-size: 200% 200%;
+  animation: gradientMove 15s ease infinite;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
   padding: 20px;
-  background: #111;
-  color: white;
 }
 
-ul {
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ===============================
+   REUSABLE GLASS CARD
+================================ */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 24px;
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--card-shadow);
+}
+
+/* ===============================
+   MAIN LAYOUT
+================================ */
+.app-container {
+  display: grid;
+  grid-template-columns: 300px 1fr; /* Sidebar | Main Content */
+  gap: 30px;
+  width: 100%;
+  max-width: 1200px;
+  height: 85vh; /* Fixed height for the card layout look */
+  position: relative;
+}
+
+/* ===============================
+   SIDEBAR
+================================ */
+.sidebar {
+  padding: 40px 30px;
   display: flex;
-  gap: 20px;
-  list-style: none;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  height: 100%;
 }
 
-section {
-  padding: 60px;
+.profile-section {
+  margin-bottom: 40px;
 }
 
-.project {
-  background: #f4f4f4;
-  padding: 20px;
-  margin: 20px 0;
-  border-radius: 8px;
-}
-
-.light {
-  background: white;
-  color: black;
-}
-
-.dark {
-  background: #121212;
+/* Placeholder for profile image */
+.profile-img-placeholder {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ffcc00, #ff9900); /* Example avatar color */
+  margin: 0 auto 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 50px;
   color: white;
+  border: 4px solid rgba(255, 255, 255, 0.1);
 }
 
-.fade-in {
-  animation: fade 1s ease-in;
+.sidebar h2 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #fff;
 }
 
-@keyframes fade {
-  from { opacity: 0; transform: translateY(15px); }
+.name-highlight {
+  color: var(--primary-color);
+}
+
+.sidebar p {
+  color: var(--text-muted);
+  font-size: 15px;
+}
+
+/* NAVIGATION */
+.nav-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+}
+
+.nav-btn {
+  background: transparent;
+  border: none;
+  padding: 14px;
+  border-radius: 12px;
+  color: var(--text-color);
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.nav-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.nav-btn.active {
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--primary-color);
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* ===============================
+   MAIN CONTENT AREA
+================================ */
+.main-content {
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Spushes social links to bottom */
+  height: 100%;
+  overflow-y: auto; /* Scroll inside the main panel if content is long */
+}
+
+/* Hide scrollbar for a cleaner look */
+.main-content::-webkit-scrollbar {
+  width: 0px;
+}
+
+.content-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-form {
+/* Headings in main content */
+.content-section h1 {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.content-section h2 {
+  font-size: 32px;
+  margin-bottom: 24px;
+  position: relative;
+  display: inline-block;
+}
+
+.content-section h2::after {
+  content: "";
+  display: block;
+  width: 50%;
+  height: 4px;
+  background: var(--primary-color);
+  margin: 8px auto 0;
+  border-radius: 2px;
+}
+
+.content-section p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--text-muted);
+  max-width: 700px;
+}
+
+/* ===============================
+   SOCIAL LINKS
+================================ */
+.social-links-container {
   display: flex;
-  flex-direction: column;
-  gap: 12px;
-  max-width: 400px;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.social-links-bar {
+  display: flex;
+  gap: 25px;
+  padding: 15px 30px;
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 20px;
+}
+
+.social-icon {
+  color: var(--text-color);
+  font-size: 22px;
+  text-decoration: none;
+  transition: color 0.3s;
+  /* Temporary placeholder style */
+  font-style: normal;
+  font-weight: bold;
+}
+
+.social-icon:hover {
+  color: var(--primary-color);
+}
+
+/* ===============================
+   THEME TOGGLE
+================================ */
+.theme-toggle-btn {
+  position: absolute;
+  top: -60px;
+  right: 0;
+  width: 45px;
+  height: 45px;
+  border-radius: 12px;
+  border: none;
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  color: var(--text-color);
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: var(--card-shadow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
+}
+
+.theme-toggle-btn:hover {
+  transform: scale(1.1);
+}
+
+/* ===============================
+   RESPONSIVE DESIGN
+================================ */
+@media (max-width: 900px) {
+  .app-container {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+
+  body {
+    padding: 10px;
+    align-items: flex-start;
+  }
+  
+  .theme-toggle-btn {
+    top: 10px;
+    right: 10px;
+  }
+
+  .sidebar {
+    padding: 30px;
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+    gap: 20px;
+  }
+
+  .profile-section {
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .profile-img-placeholder {
+    width: 70px;
+    height: 70px;
+    margin: 0;
+    font-size: 28px;
+  }
+
+  .nav-menu {
+    flex-direction: row;
+    width: auto;
+  }
+  
+  .nav-btn {
+      padding: 10px 15px;
+      font-size: 14px;
+  }
+
+  .main-content {
+    padding: 40px 20px;
+    height: auto;
+  }
+  
+  .content-section h1 { font-size: 36px; }
+  .content-section h2 { font-size: 28px; }
+}
+
+@media (max-width: 600px) {
+    .sidebar {
+        flex-direction: column;
+        text-align: center;
+    }
+    .profile-section {
+        flex-direction: column;
+    }
+    .nav-menu {
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
 }

@@ -7,12 +7,14 @@ function Navbar({ darkMode, setDarkMode }) {
                 <li><a href="#about">About</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
             </ul>
 
             <button onClick={() => setDarkMode(!darkMode)}>
                 {darkMode ? "☀️" : "🌙"}
             </button>
+
+            <div className="profile-pic">TN</div>
+
         </nav>
     );
 }
